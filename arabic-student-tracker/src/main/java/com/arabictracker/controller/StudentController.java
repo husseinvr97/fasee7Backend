@@ -12,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -31,19 +29,23 @@ public class StudentController {
     }
     
     @GetMapping
-    public ResponseEntity<List<StudentResponse>> getActiveStudents(
-            @RequestParam(required = false) String search) {
-        List<StudentResponse> students = search != null && !search.isEmpty()
-            ? studentService.searchStudents(search)
-            : studentService.getActiveStudents();
-        return ResponseEntity.ok(students);
-    }
+public ResponseEntity<List<StudentResponse>> getAllStudents() {  // Change method name
+    List<StudentResponse> students = studentService.getAllStudents();  // Change service call
+    return ResponseEntity.ok(students);
+}
     
     @GetMapping("/archived")
     public ResponseEntity<List<StudentResponse>> getArchivedStudents() {
         List<StudentResponse> students = studentService.getArchivedStudents();
         return ResponseEntity.ok(students);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<StudentResponse>> searchStudents(
+        @RequestParam String query) {
+    List<StudentResponse> students = studentService.searchStudents(query);
+    return ResponseEntity.ok(students);
+}
     
     @GetMapping("/active")
     public ResponseEntity<List<StudentResponse>> getActiveStudents() {

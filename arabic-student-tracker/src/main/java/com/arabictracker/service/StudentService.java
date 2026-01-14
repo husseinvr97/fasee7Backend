@@ -73,6 +73,12 @@ public class StudentService {
             .map(this::mapToStudentResponse)
             .collect(Collectors.toList());
     }
+
+    public List<StudentResponse> getAllStudents() {
+    return studentRepository.findAll().stream()
+        .map(this::mapToStudentResponse)
+        .collect(Collectors.toList());
+}
     
     public List<StudentResponse> getArchivedStudents() {
         return studentRepository.findByStatus(StudentStatus.ARCHIVED).stream()
