@@ -6,7 +6,7 @@ spring:
   # Enable Virtual Threads (Java 21 feature)
   threads:
     virtual:
-      enabled: true
+      enabled: false
   
   # Database Configuration
   datasource:
