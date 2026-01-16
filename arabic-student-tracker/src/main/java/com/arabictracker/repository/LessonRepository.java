@@ -24,4 +24,13 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
     List<Lesson> findExpiredDeletedLessons(@Param("cutoffDate") LocalDateTime cutoffDate);
     
     Optional<Lesson> findByIdAndDeletedAtIsNull(Long id);
+
+
+    // Add these methods to your existing LessonRepository interface
+
+// Get all soft-deleted lessons
+List<Lesson> findByDeletedAtIsNotNull();
+
+// Get a specific deleted lesson by ID
+Optional<Lesson> findByIdAndDeletedAtIsNotNull(Long id);
 }

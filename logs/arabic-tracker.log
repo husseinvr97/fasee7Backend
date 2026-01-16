@@ -3158,3 +3158,1760 @@ org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique co
 2026-01-16 18:06:55 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-01-16 18:06:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2026-01-16 18:06:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-01-16 19:25:30 [restartedMain] INFO  c.a.ArabicTrackerApplication - Starting ArabicTrackerApplication using Java 21.0.8 with PID 12856 (G:\Projects\Java Projects\ExternalProjects\StudentTrackingSystem\Backend\arabic-student-tracker\target\classes started by HusseinVR97 in G:\Projects\Java Projects\ExternalProjects\StudentTrackingSystem\Backend)
+2026-01-16 19:25:30 [restartedMain] DEBUG c.a.ArabicTrackerApplication - Running with Spring Boot v4.0.0, Spring v7.0.1
+2026-01-16 19:25:30 [restartedMain] INFO  c.a.ArabicTrackerApplication - No active profile set, falling back to 1 default profile: "default"
+2026-01-16 19:25:30 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-01-16 19:25:30 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-01-16 19:25:31 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-16 19:25:31 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 75 ms. Found 8 JPA repository interfaces.
+2026-01-16 19:25:32 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-01-16 19:25:32 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-01-16 19:25:32 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.14]
+2026-01-16 19:25:32 [restartedMain] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 2063 ms
+2026-01-16 19:25:33 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-01-16 19:25:33 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 7.1.8.Final
+2026-01-16 19:25:33 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-16 19:25:33 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-01-16 19:25:33 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2b558b9a
+2026-01-16 19:25:33 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-01-16 19:25:33 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-01-16 19:25:33 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/arabic_student_tracker_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.1
+	Default catalog/schema: arabic_student_tracker_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-01-16 19:25:34 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-16 19:25:34 [restartedMain] INFO  org.hibernate.orm.jdbc.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 20)
+2026-01-16 19:25:34 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-16 19:25:35 [restartedMain] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-01-16 19:25:36 [restartedMain] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-16 19:25:37 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoints beneath base path '/actuator'
+2026-01-16 19:25:37 [restartedMain] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-01-16 19:25:37 [restartedMain] INFO  c.a.ArabicTrackerApplication - Started ArabicTrackerApplication in 7.049 seconds (process running for 7.981)
+2026-01-16 19:25:39 [RMI TCP Connection(2)-127.0.0.1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-01-16 19:25:39 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-01-16 19:25:39 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-01-16 19:25:48 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        s1_0.id,
+        s1_0.archived_date,
+        s1_0.created_at,
+        s1_0.enrollment_date,
+        s1_0.father_name,
+        s1_0.first_name,
+        s1_0.full_name,
+        s1_0.parent_id,
+        s1_0.search_name,
+        s1_0.status,
+        s1_0.student_phone,
+        s1_0.updated_at 
+    from
+        students s1_0
+2026-01-16 19:25:48 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.created_at,
+        p1_0.email,
+        p1_0.full_name,
+        p1_0.phone,
+        p1_0.preferred_contact_method,
+        p1_0.updated_at,
+        p1_0.whatsapp_number 
+    from
+        parents p1_0 
+    where
+        p1_0.id=?
+2026-01-16 19:25:48 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.created_at,
+        p1_0.email,
+        p1_0.full_name,
+        p1_0.phone,
+        p1_0.preferred_contact_method,
+        p1_0.updated_at,
+        p1_0.whatsapp_number 
+    from
+        parents p1_0 
+    where
+        p1_0.id=?
+2026-01-16 19:25:48 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.created_at,
+        p1_0.email,
+        p1_0.full_name,
+        p1_0.phone,
+        p1_0.preferred_contact_method,
+        p1_0.updated_at,
+        p1_0.whatsapp_number 
+    from
+        parents p1_0 
+    where
+        p1_0.id=?
+2026-01-16 19:25:48 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.created_at,
+        p1_0.email,
+        p1_0.full_name,
+        p1_0.phone,
+        p1_0.preferred_contact_method,
+        p1_0.updated_at,
+        p1_0.whatsapp_number 
+    from
+        parents p1_0 
+    where
+        p1_0.id=?
+2026-01-16 19:25:48 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.created_at,
+        p1_0.email,
+        p1_0.full_name,
+        p1_0.phone,
+        p1_0.preferred_contact_method,
+        p1_0.updated_at,
+        p1_0.whatsapp_number 
+    from
+        parents p1_0 
+    where
+        p1_0.id=?
+2026-01-16 19:25:59 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.deletedAt IS NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.deleted_at is null
+2026-01-16 19:26:07 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.deletedAt IS NOT NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.deleted_at is not null
+2026-01-16 19:26:07 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:26:07 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:26:07 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:26:07 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:26:07 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:26:07 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:26:09 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:26:09 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:26:09 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:26:27 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.id = :id 
+        AND l.deletedAt IS NOT NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.id=? 
+            and l1_0.deleted_at is not null
+2026-01-16 19:26:27 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.date = :date 
+        AND l.deletedAt IS NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.date=? 
+            and l1_0.deleted_at is null
+2026-01-16 19:26:27 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:26:27 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:26:27 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* update
+        
+    for
+        com.arabictracker.model.Lesson */update lessons 
+    set
+        attendance_marked=?,
+        date=?,
+        deleted_at=?,
+        has_homework=?,
+        homework_marked=?,
+        participation_marked=?,
+        topics_free_text=?,
+        updated_at=? 
+    where
+        id=?
+2026-01-16 19:26:29 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:26:35 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.deletedAt IS NOT NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.deleted_at is not null
+2026-01-16 19:26:35 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:26:35 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:26:35 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:26:35 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:26:38 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:26:38 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:26:47 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.deletedAt IS NOT NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.deleted_at is not null
+2026-01-16 19:26:47 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:26:47 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:26:47 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:26:47 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:26:48 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:26:48 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:35:06 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.deletedAt IS NOT NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.deleted_at is not null
+2026-01-16 19:35:06 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:35:06 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:35:06 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:35:06 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:35:07 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:35:07 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:35:30 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.id = :id 
+        AND l.deletedAt IS NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.id=? 
+            and l1_0.deleted_at is null
+2026-01-16 19:35:30 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* update
+        
+    for
+        com.arabictracker.model.Lesson */update lessons 
+    set
+        attendance_marked=?,
+        date=?,
+        deleted_at=?,
+        has_homework=?,
+        homework_marked=?,
+        participation_marked=?,
+        topics_free_text=?,
+        updated_at=? 
+    where
+        id=?
+2026-01-16 19:35:50 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.deletedAt IS NOT NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.deleted_at is not null
+2026-01-16 19:35:50 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:35:50 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:35:50 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:35:50 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:35:50 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:35:50 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:35:51 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:35:51 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:35:51 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:48:07 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        s1_0.id,
+        s1_0.archived_date,
+        s1_0.created_at,
+        s1_0.enrollment_date,
+        s1_0.father_name,
+        s1_0.first_name,
+        s1_0.full_name,
+        s1_0.parent_id,
+        s1_0.search_name,
+        s1_0.status,
+        s1_0.student_phone,
+        s1_0.updated_at 
+    from
+        students s1_0
+2026-01-16 19:48:07 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.created_at,
+        p1_0.email,
+        p1_0.full_name,
+        p1_0.phone,
+        p1_0.preferred_contact_method,
+        p1_0.updated_at,
+        p1_0.whatsapp_number 
+    from
+        parents p1_0 
+    where
+        p1_0.id=?
+2026-01-16 19:48:07 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.created_at,
+        p1_0.email,
+        p1_0.full_name,
+        p1_0.phone,
+        p1_0.preferred_contact_method,
+        p1_0.updated_at,
+        p1_0.whatsapp_number 
+    from
+        parents p1_0 
+    where
+        p1_0.id=?
+2026-01-16 19:48:07 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.created_at,
+        p1_0.email,
+        p1_0.full_name,
+        p1_0.phone,
+        p1_0.preferred_contact_method,
+        p1_0.updated_at,
+        p1_0.whatsapp_number 
+    from
+        parents p1_0 
+    where
+        p1_0.id=?
+2026-01-16 19:48:08 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.created_at,
+        p1_0.email,
+        p1_0.full_name,
+        p1_0.phone,
+        p1_0.preferred_contact_method,
+        p1_0.updated_at,
+        p1_0.whatsapp_number 
+    from
+        parents p1_0 
+    where
+        p1_0.id=?
+2026-01-16 19:48:08 [http-nio-8080-exec-9] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.id,
+        p1_0.created_at,
+        p1_0.email,
+        p1_0.full_name,
+        p1_0.phone,
+        p1_0.preferred_contact_method,
+        p1_0.updated_at,
+        p1_0.whatsapp_number 
+    from
+        parents p1_0 
+    where
+        p1_0.id=?
+2026-01-16 19:48:15 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.deletedAt IS NOT NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.deleted_at is not null
+2026-01-16 19:48:15 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:48:15 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:48:15 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:48:15 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:48:15 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:48:15 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:48:16 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:48:16 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:48:16 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:48:27 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.id = :id 
+        AND l.deletedAt IS NOT NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.id=? 
+            and l1_0.deleted_at is not null
+2026-01-16 19:48:27 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.date = :date 
+        AND l.deletedAt IS NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.date=? 
+            and l1_0.deleted_at is null
+2026-01-16 19:48:27 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:48:27 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:48:27 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* update
+        
+    for
+        com.arabictracker.model.Lesson */update lessons 
+    set
+        attendance_marked=?,
+        date=?,
+        deleted_at=?,
+        has_homework=?,
+        homework_marked=?,
+        participation_marked=?,
+        topics_free_text=?,
+        updated_at=? 
+    where
+        id=?
+2026-01-16 19:48:30 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:48:37 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.deletedAt IS NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.deleted_at is null
+2026-01-16 19:48:37 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:48:37 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:48:39 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:48:56 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.id = :id 
+        AND l.deletedAt IS NOT NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.id=? 
+            and l1_0.deleted_at is not null
+2026-01-16 19:48:56 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.date = :date 
+        AND l.deletedAt IS NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.date=? 
+            and l1_0.deleted_at is null
+2026-01-16 19:48:56 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:48:56 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:48:56 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    /* update
+        
+    for
+        com.arabictracker.model.Lesson */update lessons 
+    set
+        attendance_marked=?,
+        date=?,
+        deleted_at=?,
+        has_homework=?,
+        homework_marked=?,
+        participation_marked=?,
+        topics_free_text=?,
+        updated_at=? 
+    where
+        id=?
+2026-01-16 19:49:00 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:49:01 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.deletedAt IS NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.deleted_at is null
+2026-01-16 19:49:01 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:49:01 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:49:01 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:49:01 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:49:01 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:49:01 [http-nio-8080-exec-10] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:49:05 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        Lesson l 
+    WHERE
+        l.deletedAt IS NULL */ select
+            l1_0.id,
+            l1_0.attendance_marked,
+            l1_0.created_at,
+            l1_0.date,
+            l1_0.deleted_at,
+            l1_0.has_homework,
+            l1_0.homework_marked,
+            l1_0.participation_marked,
+            l1_0.topics_free_text,
+            l1_0.updated_at 
+        from
+            lessons l1_0 
+        where
+            l1_0.deleted_at is null
+2026-01-16 19:49:05 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:49:05 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:49:05 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        l 
+    FROM
+        LessonAttendance l 
+    WHERE
+        l.lesson.id = :lessonId */ select
+            la1_0.id,
+            la1_0.attended,
+            la1_0.consecutive_absences,
+            la1_0.created_at,
+            la1_0.lesson_id,
+            la1_0.student_id 
+        from
+            lesson_attendance la1_0 
+        where
+            la1_0.lesson_id=?
+2026-01-16 19:49:05 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* SELECT
+        s 
+    FROM
+        Student s 
+    WHERE
+        s.status = :status */ select
+            s1_0.id,
+            s1_0.archived_date,
+            s1_0.created_at,
+            s1_0.enrollment_date,
+            s1_0.father_name,
+            s1_0.first_name,
+            s1_0.full_name,
+            s1_0.parent_id,
+            s1_0.search_name,
+            s1_0.status,
+            s1_0.student_phone,
+            s1_0.updated_at 
+        from
+            students s1_0 
+        where
+            s1_0.status=?
+2026-01-16 19:49:05 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:49:05 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        ct1_0.lesson_id,
+        ct1_0.category_tag 
+    from
+        lesson_category_tags ct1_0 
+    where
+        ct1_0.lesson_id=?
+2026-01-16 19:52:38 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-01-16 19:52:38 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-01-16 19:52:38 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-01-16 19:52:38 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-01-16 19:52:38 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

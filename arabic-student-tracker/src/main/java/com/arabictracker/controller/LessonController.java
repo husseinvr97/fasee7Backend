@@ -98,4 +98,33 @@ public class LessonController {
         BehavioralIncidentResponse response = behavioralService.createBehavioralIncident(lessonId, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    // Add these endpoints to your existing LessonController class
+
+/**
+ * GET /api/lessons/deleted - Get all soft-deleted lessons
+ */
+@GetMapping("/deleted")
+public ResponseEntity<List<LessonResponse>> getDeletedLessons() {
+    List<LessonResponse> deletedLessons = lessonService.getDeletedLessons();
+    return ResponseEntity.ok(deletedLessons);
+}
+
+/**
+ * POST /api/lessons/{lessonId}/restore - Restore a soft-deleted lesson
+ */
+@PostMapping("/{lessonId}/restore")
+public ResponseEntity<LessonResponse> restoreLesson(@PathVariable Long lessonId) {
+    LessonResponse restored = lessonService.restoreLesson(lessonId);
+    return ResponseEntity.ok(restored);
+}
+
+/**
+ * DELETE /api/lessons/{lessonId}/permanent - Permanently delete a lesson
+ */
+@DeleteMapping("/{lessonId}/permanent")
+public ResponseEntity<Void> permanentlyDeleteLesson(@PathVariable Long lessonId) {
+    lessonService.permanentlyDeleteLesson(lessonId);
+    return ResponseEntity.noContent().build();
+}
 }

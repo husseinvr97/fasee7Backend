@@ -109,6 +109,72 @@ public class LessonService {
         lesson.setDeletedAt(java.time.LocalDateTime.now());
         lessonRepository.save(lesson);
     }
+
+    // Add these methods to your existing LessonService class
+
+/**
+ * Get all soft-deleted lessons
+ */
+public List<LessonResponse> getDeletedLessons() {
+    List<Lesson> deletedLessons = lessonRepository.findByDeletedAtIsNotNull();
+    
+    return deletedLessons.stream()
+        .map(this::mapToLessonResponse)
+        .collect(Collectors.toList());
+}
+
+/**
+ * Restore a soft-deleted lesson
+ */
+@Transactional
+public LessonResponse restoreLesson(Long lessonId) {
+    Lesson lesson = lessonRepository.findByIdAndDeletedAtIsNotNull(lessonId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Deleted lesson not found with ID: " + lessonId
+        ));
+    
+    // Check if restoring this lesson would conflict with an existing active lesson on the same date
+    lessonRepository.findByDateAndDeletedAtIsNull(lesson.getDate())
+        .ifPresent(existingLesson -> {
+            throw new ResponseStatusException(
+                HttpStatus.CONFLICT,
+                "Cannot restore lesson. Another active lesson already exists for date: " + lesson.getDate()
+            );
+        });
+    
+    // Restore the lesson by clearing the deletedAt timestamp
+    lesson.setDeletedAt(null);
+    Lesson restored = lessonRepository.save(lesson);
+    
+    return mapToLessonResponse(restored);
+}
+
+/**
+ * Permanently delete a lesson (hard delete)
+ */
+@Transactional
+public void permanentlyDeleteLesson(Long lessonId) {
+    Lesson lesson = lessonRepository.findByIdAndDeletedAtIsNotNull(lessonId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Deleted lesson not found with ID: " + lessonId
+        ));
+    
+    // Permanently delete associated data first (to maintain referential integrity)
+    // Delete attendance records
+    attendanceRepository.deleteByLessonId(lessonId);
+    
+    // Delete homework records
+    homeworkRepository.deleteByLessonId(lessonId);
+    
+    // Delete participation records
+    participationRepository.deleteByLessonId(lessonId);
+    
+    // Note: If you have behavioral incidents tied to lessons, delete those too
+    // behavioralIncidentRepository.deleteByLessonId(lessonId);
+    
+    // Finally, permanently delete the lesson itself
+    lessonRepository.delete(lesson);
+}
     
     private LessonResponse mapToLessonResponse(Lesson lesson) {
         LessonResponse response = new LessonResponse();
