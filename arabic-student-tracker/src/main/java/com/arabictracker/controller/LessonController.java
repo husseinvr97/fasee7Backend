@@ -1,0 +1,101 @@
+package com.arabictracker.controller;
+
+import com.arabictracker.dto.requestDto.CreateBehavioralIncidentRequest;
+import com.arabictracker.dto.requestDto.CreateLessonRequest;
+import com.arabictracker.dto.requestDto.MarkAttendanceRequest;
+import com.arabictracker.dto.requestDto.MarkHomeworkRequest;
+import com.arabictracker.dto.requestDto.MarkParticipationRequest;
+import com.arabictracker.dto.requestDto.UpdateLessonRequest;
+import com.arabictracker.dto.responseDto.AttendanceMarkResponse;
+import com.arabictracker.dto.responseDto.BehavioralIncidentResponse;
+import com.arabictracker.dto.responseDto.HomeworkMarkResponse;
+import com.arabictracker.dto.responseDto.LessonDetailResponse;
+import com.arabictracker.dto.responseDto.LessonResponse;
+import com.arabictracker.dto.responseDto.ParticipationMarkResponse;
+import com.arabictracker.service.*;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/lessons")
+@RequiredArgsConstructor
+public class LessonController {
+    
+    private final LessonService lessonService;
+    private final AttendanceService attendanceService;
+    private final BehavioralService behavioralService;
+    
+    @PostMapping
+    public ResponseEntity<LessonResponse> createLesson(
+            @Valid @RequestBody CreateLessonRequest request) {
+        LessonResponse response = lessonService.createLesson(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+    
+    @GetMapping
+    public ResponseEntity<List<LessonResponse>> getAllLessons(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        List<LessonResponse> lessons = lessonService.getAllLessons(startDate, endDate);
+        return ResponseEntity.ok(lessons);
+    }
+    
+    @GetMapping("/{lessonId}")
+    public ResponseEntity<LessonDetailResponse> getLessonById(@PathVariable Long lessonId) {
+        LessonDetailResponse lesson = lessonService.getLessonById(lessonId);
+        return ResponseEntity.ok(lesson);
+    }
+    
+    @PutMapping("/{lessonId}")
+    public ResponseEntity<LessonResponse> updateLesson(
+            @PathVariable Long lessonId,
+            @Valid @RequestBody UpdateLessonRequest request) {
+        LessonResponse updated = lessonService.updateLesson(lessonId, request);
+        return ResponseEntity.ok(updated);
+    }
+    
+    @DeleteMapping("/{lessonId}")
+    public ResponseEntity<Void> deleteLesson(@PathVariable Long lessonId) {
+        lessonService.deleteLesson(lessonId);
+        return ResponseEntity.noContent().build();
+    }
+    
+    @PostMapping("/{lessonId}/attendance")
+    public ResponseEntity<AttendanceMarkResponse> markAttendance(
+            @PathVariable Long lessonId,
+            @Valid @RequestBody MarkAttendanceRequest request) {
+        AttendanceMarkResponse response = attendanceService.markAttendance(lessonId, request);
+        return ResponseEntity.ok(response);
+    }
+    
+    @PostMapping("/{lessonId}/homework")
+    public ResponseEntity<HomeworkMarkResponse> markHomework(
+            @PathVariable Long lessonId,
+            @Valid @RequestBody MarkHomeworkRequest request) {
+        HomeworkMarkResponse response = attendanceService.markHomework(lessonId, request);
+        return ResponseEntity.ok(response);
+    }
+    
+    @PostMapping("/{lessonId}/participation")
+    public ResponseEntity<ParticipationMarkResponse> markParticipation(
+            @PathVariable Long lessonId,
+            @Valid @RequestBody MarkParticipationRequest request) {
+        ParticipationMarkResponse response = attendanceService.markParticipation(lessonId, request);
+        return ResponseEntity.ok(response);
+    }
+    
+    @PostMapping("/{lessonId}/behavioral-incidents")
+    public ResponseEntity<BehavioralIncidentResponse> createBehavioralIncident(
+            @PathVariable Long lessonId,
+            @Valid @RequestBody CreateBehavioralIncidentRequest request) {
+        BehavioralIncidentResponse response = behavioralService.createBehavioralIncident(lessonId, request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+}

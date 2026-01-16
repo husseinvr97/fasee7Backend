@@ -1,6 +1,5 @@
 package com.arabictracker.controller;
 
-import com.arabictracker.dto.*;
 import com.arabictracker.dto.requestDto.UpdateParentRequest;
 import com.arabictracker.dto.responseDto.ParentSummary;
 import com.arabictracker.dto.responseDto.ParentWithStudentsResponse;

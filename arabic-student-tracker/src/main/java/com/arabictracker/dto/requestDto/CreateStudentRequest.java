@@ -1,11 +1,9 @@
 package com.arabictracker.dto.requestDto;
 
 import com.arabictracker.model.Parent.ContactMethod;
-import com.arabictracker.model.Student.StudentStatus;
+
 import lombok.Data;
 import jakarta.validation.constraints.*;
-import java.time.LocalDateTime;
-import java.util.List;
 
 // ============ REQUEST DTOs ============
 
