@@ -1,17 +1,25 @@
 package com.arabictracker.controller;
 
+import com.arabictracker.dto.requestDto.BatchUpdateAttendanceRequest;
 import com.arabictracker.dto.requestDto.CreateBehavioralIncidentRequest;
 import com.arabictracker.dto.requestDto.CreateLessonRequest;
 import com.arabictracker.dto.requestDto.MarkAttendanceRequest;
 import com.arabictracker.dto.requestDto.MarkHomeworkRequest;
 import com.arabictracker.dto.requestDto.MarkParticipationRequest;
+import com.arabictracker.dto.requestDto.UpdateAttendanceRequest;
+import com.arabictracker.dto.requestDto.UpdateHomeworkRequest;
 import com.arabictracker.dto.requestDto.UpdateLessonRequest;
+import com.arabictracker.dto.requestDto.UpdateParticipationRequest;
 import com.arabictracker.dto.responseDto.AttendanceMarkResponse;
+import com.arabictracker.dto.responseDto.AttendanceUpdateResponse;
+import com.arabictracker.dto.responseDto.BatchAttendanceUpdateResponse;
 import com.arabictracker.dto.responseDto.BehavioralIncidentResponse;
 import com.arabictracker.dto.responseDto.HomeworkMarkResponse;
+import com.arabictracker.dto.responseDto.HomeworkUpdateResponse;
 import com.arabictracker.dto.responseDto.LessonDetailResponse;
 import com.arabictracker.dto.responseDto.LessonResponse;
 import com.arabictracker.dto.responseDto.ParticipationMarkResponse;
+import com.arabictracker.dto.responseDto.ParticipationUpdateResponse;
 import com.arabictracker.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -126,5 +134,68 @@ public ResponseEntity<LessonResponse> restoreLesson(@PathVariable Long lessonId)
 public ResponseEntity<Void> permanentlyDeleteLesson(@PathVariable Long lessonId) {
     lessonService.permanentlyDeleteLesson(lessonId);
     return ResponseEntity.noContent().build();
+}
+
+/**
+ * OPTION 1: Update single student attendance
+ * PATCH /api/lessons/{lessonId}/attendance/{studentId}
+ */
+@PatchMapping("/{lessonId}/attendance/{studentId}")
+public ResponseEntity<AttendanceUpdateResponse> updateSingleStudentAttendance(
+        @PathVariable Long lessonId,
+        @PathVariable Long studentId,
+        @Valid @RequestBody UpdateAttendanceRequest request) {
+    
+    AttendanceUpdateResponse response = attendanceService.updateSingleStudentAttendance(
+        lessonId, studentId, request
+    );
+    return ResponseEntity.ok(response);
+}
+
+/**
+ * OPTION 2: Update multiple students attendance (batch update)
+ * PATCH /api/lessons/{lessonId}/attendance
+ */
+@PatchMapping("/{lessonId}/attendance")
+public ResponseEntity<BatchAttendanceUpdateResponse> updateMultipleStudentsAttendance(
+        @PathVariable Long lessonId,
+        @Valid @RequestBody BatchUpdateAttendanceRequest request) {
+    
+    BatchAttendanceUpdateResponse response = attendanceService.updateMultipleStudentsAttendance(
+        lessonId, request
+    );
+    return ResponseEntity.ok(response);
+}
+
+/**
+ * Update single student homework completion
+ * PATCH /api/lessons/{lessonId}/homework/{studentId}
+ */
+@PatchMapping("/{lessonId}/homework/{studentId}")
+public ResponseEntity<HomeworkUpdateResponse> updateSingleStudentHomework(
+        @PathVariable Long lessonId,
+        @PathVariable Long studentId,
+        @Valid @RequestBody UpdateHomeworkRequest request) {
+    
+    HomeworkUpdateResponse response = attendanceService.updateSingleStudentHomework(
+        lessonId, studentId, request
+    );
+    return ResponseEntity.ok(response);
+}
+
+/**
+ * Update single student participation score
+ * PATCH /api/lessons/{lessonId}/participation/{studentId}
+ */
+@PatchMapping("/{lessonId}/participation/{studentId}")
+public ResponseEntity<ParticipationUpdateResponse> updateSingleStudentParticipation(
+        @PathVariable Long lessonId,
+        @PathVariable Long studentId,
+        @Valid @RequestBody UpdateParticipationRequest request) {
+    
+    ParticipationUpdateResponse response = attendanceService.updateSingleStudentParticipation(
+        lessonId, studentId, request
+    );
+    return ResponseEntity.ok(response);
 }
 }

@@ -1,17 +1,25 @@
 package com.arabictracker.service;
 
 
+import com.arabictracker.dto.requestDto.BatchUpdateAttendanceRequest;
 import com.arabictracker.dto.requestDto.MarkAttendanceRequest;
 import com.arabictracker.dto.requestDto.MarkHomeworkRequest;
 import com.arabictracker.dto.requestDto.MarkParticipationRequest;
 import com.arabictracker.dto.requestDto.ParticipationScoreDto;
+import com.arabictracker.dto.requestDto.UpdateAttendanceRequest;
+import com.arabictracker.dto.requestDto.UpdateHomeworkRequest;
+import com.arabictracker.dto.requestDto.UpdateParticipationRequest;
 import com.arabictracker.dto.responseDto.AbsentStudentWarning;
 import com.arabictracker.dto.responseDto.AttendanceMarkResponse;
 import com.arabictracker.dto.responseDto.AttendanceRecordDto;
+import com.arabictracker.dto.responseDto.AttendanceUpdateResponse;
 import com.arabictracker.dto.responseDto.AttendanceWarningResponse;
+import com.arabictracker.dto.responseDto.BatchAttendanceUpdateResponse;
 import com.arabictracker.dto.responseDto.HomeworkMarkResponse;
+import com.arabictracker.dto.responseDto.HomeworkUpdateResponse;
 import com.arabictracker.dto.responseDto.LessonDetailDto;
 import com.arabictracker.dto.responseDto.ParticipationMarkResponse;
+import com.arabictracker.dto.responseDto.ParticipationUpdateResponse;
 import com.arabictracker.dto.responseDto.StudentAttendanceHistoryResponse;
 import com.arabictracker.dto.responseDto.StudentMonthlyAttendanceResponse;
 import com.arabictracker.dto.responseDto.StudentWarningDto;
@@ -121,6 +129,208 @@ public class AttendanceService {
         
         return response;
     }
+
+    /**
+ * Update attendance for a single student (OPTION 1)
+ */
+@Transactional
+public AttendanceUpdateResponse updateSingleStudentAttendance(
+        Long lessonId, Long studentId, UpdateAttendanceRequest request) {
+    
+    // Verify lesson exists and is not deleted
+    Lesson lesson = lessonRepository.findByIdAndDeletedAtIsNull(lessonId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Lesson not found"
+        ));
+    
+    // Verify student exists and is active
+    Student student = studentRepository.findById(studentId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Student not found"
+        ));
+    
+    if (student.getStatus() == Student.StudentStatus.ARCHIVED) {
+        throw new ResponseStatusException(
+            HttpStatus.BAD_REQUEST,
+            "Cannot update attendance for archived student: " + student.getFullName()
+        );
+    }
+    
+    // Find existing attendance record
+    LessonAttendance attendance = attendanceRepository
+        .findByLessonIdAndStudentId(lessonId, studentId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, 
+            "Attendance record not found for this student in this lesson"
+        ));
+    
+    // Store old status for comparison
+    boolean wasAttended = attendance.getAttended();
+    
+    // Update attendance status
+    attendance.setAttended(request.getAttended());
+    
+    // Recalculate consecutive absences if status changed
+    if (request.getAttended()) {
+        // Student is now marked as attended - reset consecutive absences
+        attendance.setConsecutiveAbsences(0);
+        
+        // Create default participation score if doesn't exist
+        if (!participationRepository.findByLessonIdAndStudentId(lessonId, studentId).isPresent()) {
+            LessonParticipation participation = new LessonParticipation();
+            participation.setLesson(lesson);
+            participation.setStudent(student);
+            participation.setScore(1);
+            participationRepository.save(participation);
+        }
+    } else {
+        // Student is now marked as absent - recalculate consecutive absences
+        int consecutiveAbsences = calculateConsecutiveAbsences(studentId, lesson.getDate());
+        attendance.setConsecutiveAbsences(consecutiveAbsences);
+        
+        // Remove participation and homework if they exist
+        participationRepository.findByLessonIdAndStudentId(lessonId, studentId)
+            .ifPresent(p -> participationRepository.delete(p));
+        homeworkRepository.findByLessonIdAndStudentId(lessonId, studentId)
+            .ifPresent(h -> homeworkRepository.delete(h));
+    }
+    
+    // Save updated attendance
+    attendanceRepository.save(attendance);
+    
+    // Build response
+    AttendanceUpdateResponse response = new AttendanceUpdateResponse();
+    response.setLessonId(lessonId);
+    response.setStudentId(studentId);
+    response.setStudentName(student.getFullName());
+    response.setAttended(attendance.getAttended());
+    response.setConsecutiveAbsences(attendance.getConsecutiveAbsences());
+    
+    if (wasAttended != request.getAttended()) {
+        response.setMessage(request.getAttended() 
+            ? "Student marked as attended" 
+            : "Student marked as absent");
+    } else {
+        response.setMessage("No changes made - status was already " + 
+            (request.getAttended() ? "attended" : "absent"));
+    }
+    
+    return response;
+}
+
+
+/**
+ * Update attendance for multiple students (OPTION 2)
+ */
+@Transactional
+public BatchAttendanceUpdateResponse updateMultipleStudentsAttendance(
+        Long lessonId, BatchUpdateAttendanceRequest request) {
+    
+    // Verify lesson exists and is not deleted
+    Lesson lesson = lessonRepository.findByIdAndDeletedAtIsNull(lessonId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Lesson not found"
+        ));
+    
+    List<AttendanceUpdateResponse> updates = new ArrayList<>();
+    
+    for (BatchUpdateAttendanceRequest.AttendanceUpdate update : request.getUpdates()) {
+        try {
+            // Verify student exists and is active
+            Student student = studentRepository.findById(update.getStudentId())
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Student not found: " + update.getStudentId()
+                ));
+            
+            if (student.getStatus() == Student.StudentStatus.ARCHIVED) {
+                AttendanceUpdateResponse errorResponse = new AttendanceUpdateResponse();
+                errorResponse.setLessonId(lessonId);
+                errorResponse.setStudentId(update.getStudentId());
+                errorResponse.setStudentName(student.getFullName());
+                errorResponse.setMessage("Skipped: Student is archived");
+                updates.add(errorResponse);
+                continue;
+            }
+            
+            // Find existing attendance record
+            LessonAttendance attendance = attendanceRepository
+                .findByLessonIdAndStudentId(lessonId, update.getStudentId())
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, 
+                    "Attendance record not found for student: " + student.getFullName()
+                ));
+            
+            // Store old status
+            boolean wasAttended = attendance.getAttended();
+            
+            // Update attendance
+            attendance.setAttended(update.getAttended());
+            
+            // Handle consequences of attendance change
+            if (update.getAttended()) {
+                // Now attended - reset absences
+                attendance.setConsecutiveAbsences(0);
+                
+                // Create default participation if doesn't exist
+                if (!participationRepository.findByLessonIdAndStudentId(lessonId, update.getStudentId()).isPresent()) {
+                    LessonParticipation participation = new LessonParticipation();
+                    participation.setLesson(lesson);
+                    participation.setStudent(student);
+                    participation.setScore(1);
+                    participationRepository.save(participation);
+                }
+            } else {
+                // Now absent - recalculate absences
+                int consecutiveAbsences = calculateConsecutiveAbsences(update.getStudentId(), lesson.getDate());
+                attendance.setConsecutiveAbsences(consecutiveAbsences);
+                
+                // Remove participation and homework
+                participationRepository.findByLessonIdAndStudentId(lessonId, update.getStudentId())
+                    .ifPresent(p -> participationRepository.delete(p));
+                homeworkRepository.findByLessonIdAndStudentId(lessonId, update.getStudentId())
+                    .ifPresent(h -> homeworkRepository.delete(h));
+            }
+            
+            // Save
+            attendanceRepository.save(attendance);
+            
+            // Build individual response
+            AttendanceUpdateResponse updateResponse = new AttendanceUpdateResponse();
+            updateResponse.setLessonId(lessonId);
+            updateResponse.setStudentId(update.getStudentId());
+            updateResponse.setStudentName(student.getFullName());
+            updateResponse.setAttended(attendance.getAttended());
+            updateResponse.setConsecutiveAbsences(attendance.getConsecutiveAbsences());
+            
+            if (wasAttended != update.getAttended()) {
+                updateResponse.setMessage(update.getAttended() 
+                    ? "Updated to attended" 
+                    : "Updated to absent");
+            } else {
+                updateResponse.setMessage("No change needed");
+            }
+            
+            updates.add(updateResponse);
+            
+        } catch (Exception e) {
+            // Log error but continue with other updates
+            AttendanceUpdateResponse errorResponse = new AttendanceUpdateResponse();
+            errorResponse.setLessonId(lessonId);
+            errorResponse.setStudentId(update.getStudentId());
+            errorResponse.setMessage("Error: " + e.getMessage());
+            updates.add(errorResponse);
+        }
+    }
+    
+    // Build batch response
+    BatchAttendanceUpdateResponse response = new BatchAttendanceUpdateResponse();
+    response.setLessonId(lessonId);
+    response.setUpdatedCount(updates.size());
+    response.setUpdates(updates);
+    response.setMessage("Processed " + updates.size() + " attendance updates");
+    
+    return response;
+}
     
     private int calculateConsecutiveAbsences(Long studentId, LocalDate currentLessonDate) {
         // Get all attendance records for this student before current lesson, ordered by date DESC
@@ -271,6 +481,168 @@ public class AttendanceService {
         
         return response;
     }
+
+    /**
+ * Update homework completion for a single student
+ */
+@Transactional
+public HomeworkUpdateResponse updateSingleStudentHomework(
+        Long lessonId, Long studentId, UpdateHomeworkRequest request) {
+    
+    // Verify lesson exists and is not deleted
+    Lesson lesson = lessonRepository.findByIdAndDeletedAtIsNull(lessonId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Lesson not found"
+        ));
+    
+    // Check if lesson has homework
+    if (!lesson.getHasHomework()) {
+        throw new ResponseStatusException(
+            HttpStatus.BAD_REQUEST,
+            "This lesson is marked as having no homework"
+        );
+    }
+    
+    // Verify student exists and is active
+    Student student = studentRepository.findById(studentId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Student not found"
+        ));
+    
+    if (student.getStatus() == Student.StudentStatus.ARCHIVED) {
+        throw new ResponseStatusException(
+            HttpStatus.BAD_REQUEST,
+            "Cannot update homework for archived student: " + student.getFullName()
+        );
+    }
+    
+    // Verify student attended the lesson
+    LessonAttendance attendance = attendanceRepository
+        .findByLessonIdAndStudentId(lessonId, studentId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND,
+            "Attendance record not found for this student"
+        ));
+    
+    if (!attendance.getAttended()) {
+        throw new ResponseStatusException(
+            HttpStatus.BAD_REQUEST,
+            "Cannot mark homework for absent student: " + student.getFullName()
+        );
+    }
+    
+    // Find or create homework record
+    LessonHomework homework = homeworkRepository
+        .findByLessonIdAndStudentId(lessonId, studentId)
+        .orElse(new LessonHomework());
+    
+    // Store old status for comparison
+    Boolean wasCompleted = homework.getId() != null ? homework.getCompleted() : null;
+    
+    // Update homework
+    homework.setLesson(lesson);
+    homework.setStudent(student);
+    homework.setCompleted(request.getCompleted());
+    
+    // Save
+    homeworkRepository.save(homework);
+    
+    // Build response
+    HomeworkUpdateResponse response = new HomeworkUpdateResponse();
+    response.setLessonId(lessonId);
+    response.setStudentId(studentId);
+    response.setStudentName(student.getFullName());
+    response.setCompleted(homework.getCompleted());
+    
+    if (wasCompleted == null) {
+        response.setMessage("Homework status created: " + 
+            (request.getCompleted() ? "completed" : "not completed"));
+    } else if (!wasCompleted.equals(request.getCompleted())) {
+        response.setMessage("Homework updated to: " + 
+            (request.getCompleted() ? "completed" : "not completed"));
+    } else {
+        response.setMessage("No change - homework was already " + 
+            (request.getCompleted() ? "completed" : "not completed"));
+    }
+    
+    return response;
+}
+
+
+/**
+ * Update participation score for a single student
+ */
+@Transactional
+public ParticipationUpdateResponse updateSingleStudentParticipation(
+        Long lessonId, Long studentId, UpdateParticipationRequest request) {
+    
+    // Verify lesson exists and is not deleted
+    Lesson lesson = lessonRepository.findByIdAndDeletedAtIsNull(lessonId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Lesson not found"
+        ));
+    
+    // Verify student exists and is active
+    Student student = studentRepository.findById(studentId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Student not found"
+        ));
+    
+    if (student.getStatus() == Student.StudentStatus.ARCHIVED) {
+        throw new ResponseStatusException(
+            HttpStatus.BAD_REQUEST,
+            "Cannot update participation for archived student: " + student.getFullName()
+        );
+    }
+    
+    // Verify student attended the lesson
+    LessonAttendance attendance = attendanceRepository
+        .findByLessonIdAndStudentId(lessonId, studentId)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND,
+            "Attendance record not found for this student"
+        ));
+    
+    if (!attendance.getAttended()) {
+        throw new ResponseStatusException(
+            HttpStatus.BAD_REQUEST,
+            "Cannot mark participation for absent student: " + student.getFullName()
+        );
+    }
+    
+    // Find or create participation record
+    LessonParticipation participation = participationRepository
+        .findByLessonIdAndStudentId(lessonId, studentId)
+        .orElse(new LessonParticipation());
+    
+    // Store old score for comparison
+    Integer oldScore = participation.getId() != null ? participation.getScore() : null;
+    
+    // Update participation
+    participation.setLesson(lesson);
+    participation.setStudent(student);
+    participation.setScore(request.getScore());
+    
+    // Save
+    participationRepository.save(participation);
+    
+    // Build response
+    ParticipationUpdateResponse response = new ParticipationUpdateResponse();
+    response.setLessonId(lessonId);
+    response.setStudentId(studentId);
+    response.setStudentName(student.getFullName());
+    response.setScore(participation.getScore());
+    
+    if (oldScore == null) {
+        response.setMessage("Participation score created: " + request.getScore());
+    } else if (!oldScore.equals(request.getScore())) {
+        response.setMessage("Participation score updated from " + oldScore + " to " + request.getScore());
+    } else {
+        response.setMessage("No change - score was already " + request.getScore());
+    }
+    
+    return response;
+}
     
     public StudentAttendanceHistoryResponse getStudentAttendanceHistory(
             Long studentId, LocalDate startDate, LocalDate endDate) {
