@@ -35,4 +35,6 @@ public interface BehavioralIncidentRepository extends JpaRepository<BehavioralIn
     );
     
     void deleteByLessonId(Long lessonId);
+
+    List<BehavioralIncident> findByStudentId(Long studentId);
 }

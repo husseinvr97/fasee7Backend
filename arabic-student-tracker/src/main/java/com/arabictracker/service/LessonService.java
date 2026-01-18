@@ -4,6 +4,7 @@ import com.arabictracker.dto.requestDto.CreateLessonRequest;
 import com.arabictracker.dto.requestDto.UpdateLessonRequest;
 import com.arabictracker.dto.responseDto.AbsentStudentDto;
 import com.arabictracker.dto.responseDto.AttendedStudentDto;
+import com.arabictracker.dto.responseDto.BehavioralIncidentResponse;
 import com.arabictracker.dto.responseDto.LessonDetailResponse;
 import com.arabictracker.dto.responseDto.LessonResponse;
 import com.arabictracker.model.*;
@@ -27,7 +28,7 @@ public class LessonService {
     private final LessonHomeworkRepository homeworkRepository;
     private final LessonParticipationRepository participationRepository;
     private final StudentRepository studentRepository;
-    
+    private final BehavioralService behavioralService;
     @Transactional
     public LessonResponse createLesson(CreateLessonRequest request) {
         // Check if lesson already exists for this date
@@ -214,6 +215,9 @@ public void permanentlyDeleteLesson(Long lessonId) {
         response.setParticipationMarked(lesson.getParticipationMarked());
         response.setCreatedAt(lesson.getCreatedAt());
         response.setUpdatedAt(lesson.getUpdatedAt());
+
+        List<BehavioralIncidentResponse> incidents = behavioralService.getLessonIncidents(lesson.getId());
+    response.setBehavioralIncidents(incidents);
         
         // Get attendance records
         List<LessonAttendance> attendanceList = attendanceRepository.findByLessonId(lesson.getId());

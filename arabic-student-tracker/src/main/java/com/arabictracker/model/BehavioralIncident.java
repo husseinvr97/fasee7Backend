@@ -49,9 +49,10 @@ public class BehavioralIncident {
     private LocalDateTime createdAt;
     
     public enum IncidentType {
-        TALKS_WITH_OTHERS,
-        DISRUPTIVE,
-        DISRESPECTFUL,
-        LATE
-    }
+    TALKS_WITH_OTHERS,
+    DISRUPTIVE,
+    DISRESPECTFUL,
+    LATE,
+    LEFT_EARLIER  // ← ADD THIS NEW TYPE
+}
 }

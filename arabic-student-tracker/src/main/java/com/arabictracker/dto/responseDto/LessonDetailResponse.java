@@ -20,6 +20,7 @@ public class LessonDetailResponse {
     private Boolean participationMarked;
     private List<AttendedStudentDto> attendedStudents;
     private List<AbsentStudentDto> absentStudents;
+    private List<BehavioralIncidentResponse> behavioralIncidents;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

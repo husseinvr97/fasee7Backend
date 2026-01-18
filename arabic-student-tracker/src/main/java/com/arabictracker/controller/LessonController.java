@@ -118,6 +118,14 @@ public ResponseEntity<List<LessonResponse>> getDeletedLessons() {
     return ResponseEntity.ok(deletedLessons);
 }
 
+@GetMapping("/{lessonId}/behavioral-incidents")
+public ResponseEntity<List<BehavioralIncidentResponse>> getLessonBehavioralIncidents(
+        @PathVariable Long lessonId) {
+    
+    List<BehavioralIncidentResponse> incidents = behavioralService.getLessonIncidents(lessonId);
+    return ResponseEntity.ok(incidents);
+}
+
 /**
  * POST /api/lessons/{lessonId}/restore - Restore a soft-deleted lesson
  */

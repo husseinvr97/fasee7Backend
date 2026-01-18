@@ -2,10 +2,13 @@ package com.arabictracker.service;
 
 import com.arabictracker.dto.requestDto.CreateStudentRequest;
 import com.arabictracker.dto.requestDto.UpdateStudentRequest;
+import com.arabictracker.dto.responseDto.BehavioralIncidentResponse;
 import com.arabictracker.dto.responseDto.DeletionResponse;
 import com.arabictracker.dto.responseDto.ParentSummary;
 import com.arabictracker.dto.responseDto.StudentResponse;
+import com.arabictracker.model.BehavioralIncident;
 import com.arabictracker.model.DeletionLog;
+import com.arabictracker.model.LessonAttendance;
 import com.arabictracker.model.Parent;
 import com.arabictracker.model.Student;
 import com.arabictracker.model.Student.StudentStatus;
@@ -15,7 +18,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +32,8 @@ public class StudentService {
     private final ParentRepository parentRepository;
     private final DeletionLogRepository deletionLogRepository;
     private final ArabicNameUtils nameUtils;
+    private final LessonAttendanceRepository attendanceRepository;
+    private final BehavioralIncidentRepository incidentRepository;
     
     @Transactional
     public StudentResponse createStudent(CreateStudentRequest request) {
@@ -87,10 +94,12 @@ public class StudentService {
     }
     
     public StudentResponse getStudentById(Long id) {
-        Student student = studentRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Student not found"));
-        return mapToStudentResponse(student);
-    }
+    Student student = studentRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Student not found"));
+    return mapToStudentResponseEnhanced(student);
+}
+
+
     
     public List<StudentResponse> searchStudents(String query) {
         String normalizedQuery = nameUtils.normalizeForSearch(query);
@@ -192,4 +201,96 @@ public class StudentService {
         
         return response;
     }
+
+    private StudentResponse mapToStudentResponseEnhanced(Student student) {
+    StudentResponse response = new StudentResponse();
+    response.setId(student.getId());
+    response.setFullName(student.getFullName());
+    response.setFirstName(student.getFirstName());
+    response.setFatherName(student.getFatherName());
+    response.setStudentPhone(student.getStudentPhone());
+    response.setStatus(student.getStatus());
+    response.setEnrollmentDate(student.getEnrollmentDate());
+    response.setArchivedDate(student.getArchivedDate());
+    response.setCreatedAt(student.getCreatedAt());
+    response.setUpdatedAt(student.getUpdatedAt());
+    
+    // Parent info
+    ParentSummary parentSummary = new ParentSummary();
+    parentSummary.setId(student.getParent().getId());
+    parentSummary.setFullName(student.getParent().getFullName());
+    parentSummary.setPhone(student.getParent().getPhone());
+    parentSummary.setWhatsappNumber(student.getParent().getWhatsappNumber());
+    parentSummary.setEmail(student.getParent().getEmail());
+    parentSummary.setPreferredContactMethod(student.getParent().getPreferredContactMethod());
+    response.setParent(parentSummary);
+    
+    // ✅ CALCULATE ATTENDANCE STATISTICS
+    List<LessonAttendance> allAttendance = attendanceRepository.findByStudentAndDateRange(
+        student.getId(),
+        LocalDate.of(2020, 1, 1), // From beginning
+        LocalDate.now()
+    );
+    
+    if (!allAttendance.isEmpty()) {
+        int totalLessons = allAttendance.size();
+        long attended = allAttendance.stream()
+            .filter(LessonAttendance::getAttended)
+            .count();
+        int absent = totalLessons - (int) attended;
+        double percentage = totalLessons > 0 ? (attended * 100.0 / totalLessons) : 0.0;
+        
+        // Get consecutive absences from most recent lesson
+        LessonAttendance mostRecent = allAttendance.stream()
+            .max((a, b) -> a.getLesson().getDate().compareTo(b.getLesson().getDate()))
+            .orElse(null);
+        
+        int consecutiveAbsences = mostRecent != null ? mostRecent.getConsecutiveAbsences() : 0;
+        
+        response.setTotalLessons(totalLessons);
+        response.setTotalLessonsAttended((int) attended);
+        response.setTotalLessonsAbsent(absent);
+        response.setAttendancePercentage(Math.round(percentage * 100.0) / 100.0); // Round to 2 decimals
+        response.setConsecutiveAbsences(consecutiveAbsences);
+    } else {
+        // No attendance records yet
+        response.setTotalLessons(0);
+        response.setTotalLessonsAttended(0);
+        response.setTotalLessonsAbsent(0);
+        response.setAttendancePercentage(0.0);
+        response.setConsecutiveAbsences(0);
+    }
+    
+    // ✅ GET BEHAVIORAL INCIDENTS
+    List<BehavioralIncident> incidents = incidentRepository.findByStudentId(student.getId());
+    
+    List<BehavioralIncidentResponse> incidentResponses = incidents.stream()
+        .map(incident -> {
+            BehavioralIncidentResponse incidentResponse = new BehavioralIncidentResponse();
+            incidentResponse.setId(incident.getId());
+            incidentResponse.setLessonId(incident.getLesson().getId());
+            incidentResponse.setStudentId(student.getId());
+            incidentResponse.setIncidentType(incident.getIncidentType().name());
+            incidentResponse.setTalkedWithStudentIds(incident.getTalkedWithStudentIds());
+            incidentResponse.setNotes(incident.getNotes());
+            incidentResponse.setCreatedAt(incident.getCreatedAt());
+            
+            // Calculate total incidents for the month of this incident
+            YearMonth month = YearMonth.from(incident.getCreatedAt());
+            Long totalIncidentsThisMonth = incidentRepository.countByStudentAndMonth(
+                student.getId(), 
+                month.getYear(), 
+                month.getMonthValue()
+            );
+            incidentResponse.setTotalIncidentsThisMonth(totalIncidentsThisMonth);
+            incidentResponse.setSpecialNotificationTriggered(totalIncidentsThisMonth >= 3);
+            
+            return incidentResponse;
+        })
+        .collect(Collectors.toList());
+    
+    response.setBehavioralIncidents(incidentResponses);
+    
+    return response;
+}
 }

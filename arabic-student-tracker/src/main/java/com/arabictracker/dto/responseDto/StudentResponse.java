@@ -1,6 +1,7 @@
 package com.arabictracker.dto.responseDto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.arabictracker.model.Student.StudentStatus;
 
@@ -19,4 +20,12 @@ public class StudentResponse {
     private ParentSummary parent;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    
+    // ✅ NEW FIELDS ADDED
+    private Integer consecutiveAbsences;
+    private Integer totalLessonsAttended;
+    private Integer totalLessonsAbsent;
+    private Integer totalLessons;
+    private Double attendancePercentage;
+    private List<BehavioralIncidentResponse> behavioralIncidents;
 }
